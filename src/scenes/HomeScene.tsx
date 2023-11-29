@@ -1,5 +1,5 @@
 import { VideoPlane } from "@/components";
-import { Tree } from "@/models";
+import { Bench, Model } from "@/models";
 
 import {
   Environment,
@@ -27,7 +27,7 @@ const Decorations = () => {
           metalness={0.2}
         />
       </RoundedBox>
-      <mesh position={[5, 1, 5]} castShadow>
+      <mesh position={[5, 0.9, 5]} castShadow>
         <icosahedronGeometry />
         <meshStandardMaterial
           color="#7e00bf"
@@ -41,7 +41,7 @@ const Decorations = () => {
         receiveShadow
         castShadow
         rotation-x={-Math.PI / 2}
-        position={[8, 1.1, 2]}
+        position={[8, 1, 2]}
         scale={[2, 2, 2]}>
         <boxGeometry args={[1, 1, 1, 3, 3, 3]} />
         <meshStandardMaterial
@@ -52,12 +52,12 @@ const Decorations = () => {
           wireframe
         />
       </mesh>
-      <mesh position={[0, -5, 0]}>
+      <mesh position={[0, -5, 0]} receiveShadow>
         <cylinderGeometry args={[10, 10, 10, 64]} />
         <meshStandardMaterial
           color="black"
           envMapIntensity={0.5}
-          roughness={0}
+          roughness={0.2}
           metalness={0}
         />
       </mesh>
@@ -69,7 +69,7 @@ export const HomeScene = () => {
   return (
     <>
       <ambientLight />
-      <OrbitControls />
+      <OrbitControls autoRotate />
 
       <Environment preset="city" />
       <GizmoHelper alignment="bottom-right" margin={[100, 100]}>
@@ -80,8 +80,16 @@ export const HomeScene = () => {
       </GizmoHelper>
       {/* Base */}
       <group position={[0, -3, 0]}>
-        <VideoPlane position={[0, 5, 0.51]} rotationY={[0, 0 ,0 ]}  videoUrl="/video.mov"/>
-        <VideoPlane position={[0, 5, -0.51]} rotationY={[0, Math.PI, 0]} videoUrl="/video.mov"/>
+        <VideoPlane
+          position={[0, 5, 0.51]}
+          rotationY={[0, 0, 0]}
+          videoUrl="/Bob Moses, Kasablanca - Afterglow (Visualizer).mp4"
+        />
+        <VideoPlane
+          position={[0, 5, -0.51]}
+          rotationY={[0, Math.PI, 0]}
+          videoUrl="/Bob Moses, Kasablanca - Afterglow (Visualizer).mp4"
+        />
         <mesh castShadow receiveShadow position={[0, 5, 0]}>
           <boxGeometry args={[17, 10, 1]} />
           <meshStandardMaterial
@@ -91,8 +99,9 @@ export const HomeScene = () => {
             metalness={0.8}
           />
         </mesh>
-        <Decorations/>
-
+        <Decorations />
+        <Model />
+        <Bench />
       </group>
       <Stars
         radius={50}
